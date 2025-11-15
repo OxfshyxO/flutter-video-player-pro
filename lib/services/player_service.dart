@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import '../models/player_model.dart';
@@ -20,7 +21,8 @@ class PlayerService {
     try {
       _state = PlayerState.loading;
       
-      _controller = VideoPlayerController.file(Uri.parse(videoPath).toFilePath());
+      final file = File(videoPath);
+      _controller = VideoPlayerController.file(file);
       await _controller.initialize();
       
       _state = PlayerState.idle;
